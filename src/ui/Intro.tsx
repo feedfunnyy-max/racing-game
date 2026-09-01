@@ -27,35 +27,18 @@ export function Intro({ children }: { children: ReactNode }): JSX.Element {
     setupSession(set)
   }, [])
 
-  return (
-    <>
-      <Suspense fallback={null}>{children}</Suspense>
+return (
       <div className={`fullscreen bg ${loading ? 'loading' : 'loaded'} ${clicked && 'clicked'}`}>
-        <div className="stack">
-          <div className="intro-keys">
-            <Keys style={{ paddingBottom: 20 }} />
-            <a className="start-link" href="#" onClick={() => setClicked(true)}>
-              {loading ? `loading ${progress.toFixed()} %` : 'Click to start'}
-            </a>
-          </div>
-          {session?.user?.aud !== 'authenticated' ? (
-            <Auth />
-          ) : (
-            <div>
-              Hello {session.user.user_metadata.full_name}
-              <button className="logout" onClick={unAuthenticateUser}>
-                Logout
-              </button>{' '}
-            </div>
-          )}
+        <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', height: '100%', width: '100%' }}>
+          
+          <h1 style={{ fontSize: '3.5rem', color: '#00ffcc', textShadow: '0 0 20px #00ffcc', margin: '0 0 20px 0', textAlign: 'center', fontFamily: 'sans-serif', textTransform: 'uppercase', fontStyle: 'italic' }}>
+            Neon Racing Game
+          </h1>
+
+          <a href="#" onClick={() => setClicked(true)} style={{ fontSize: '1.5rem', color: '#ffffff', background: '#ff0055', padding: '15px 40px', borderRadius: '30px', textDecoration: 'none', fontWeight: 'bold', boxShadow: '0 0 15px #ff0055' }}>
+            {loading ? `Loading ${progress.toFixed(0)} %` : 'Click to start'}
+          </a>
+
         </div>
-        <Footer
-          date="2. June"
-          year="2021"
-          link1={<a href="https://github.com/pmndrs/react-three-fiber">@react-three/fiber</a>}
-          link2={<a href="https://github.com/pmndrs/racing-game">/racing-game</a>}
-        />
       </div>
-    </>
-  )
-}
+    )
